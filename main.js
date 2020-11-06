@@ -163,7 +163,7 @@ const handler = (e) => {
     carDescription.append(p);
   });
 
-  document.querySelector('#burger').checked = false;
+  document.querySelector('#burger-ctrl').checked = false;
 }
 
 document.querySelectorAll('.nav-link').forEach(item => item.addEventListener("click", handler));
