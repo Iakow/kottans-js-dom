@@ -36,6 +36,7 @@ nav {
 main {
   padding: 20px;
   overflow-y: auto;
+  position: relative;
 }
 
 .photo {
@@ -91,6 +92,10 @@ a, a:active {
 
 
 @media (max-width: 1310px) {
+  nav, .close-bg {
+    z-index: 1;
+  }
+
   .photo {
     margin: 0;
     max-width: none;
