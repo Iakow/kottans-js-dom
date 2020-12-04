@@ -140,26 +140,38 @@ const carDescription = document.querySelector('.descr');
 
 let currentCarIndex = "0";
 
+const toggleActiveLink = (newActiveEl) => {
+  document.querySelector('.active').classList.toggle('active');
+  newActiveEl.classList.toggle('active');
+}
+
+const generateCarDescription = (id) => {
+  const fragment = document.createDocumentFragment();
+  const div = document.createElement('div');
+
+  CARS[id].descr.forEach(item => {
+    const p = document.createElement('p');
+
+    p.textContent = item;
+    div.appendChild(p);
+  });
+
+  fragment.appendChild(div);
+  return fragment.firstElementChild.innerHTML;
+}
+
 const handler = ({ target }) => {
   if (target.id === currentCarIndex) return;
   currentCarIndex = target.id;
 
-  document.querySelector('.active').classList.toggle('active');
-  target.classList.toggle('active');
+  toggleActiveLink(target);
 
   carPhoto.setAttribute('src', CARS[target.id].pic);
   carName.textContent = CARS[target.id].name;
   carYears.textContent = CARS[target.id].years;
   carDesign.textContent = CARS[target.id].design;
   carWins.textContent = CARS[target.id].wins;
-
-  document.querySelectorAll('.descr > p').forEach(item => item.remove());
-
-  CARS[target.id].descr.forEach(item => {
-    const p = document.createElement('p');
-    p.innerHTML = item;
-    carDescription.append(p);
-  });
+  carDescription.innerHTML = generateCarDescription(target.id);
 
   document.querySelector('#burger-ctrl').checked = false;
 }
